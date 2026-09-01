@@ -795,15 +795,17 @@ function init()
 
   -- the connection to the two Launchpads (through the
   -- midigrid mod) might not be ready at the exact
-  -- moment init runs: sending a second update shortly
-  -- after makes sure the LEDs update without having to
-  -- wait for the first key press
+  -- moment init runs. Retry the complete grid redraw
+  -- several times so the LEDs are initialized without
+  -- requiring a first key press.
   local grid_ready_metro = metro.init()
-  grid_ready_metro.time = 0.3
-  grid_ready_metro.count = 1
+  grid_ready_metro.time = 0.2
+  grid_ready_metro.count = 10
   grid_ready_metro.event = function()
     redraw_grid()
-    metro.free(grid_ready_metro.id)
+    if grid_ready_metro.count <= 1 then
+      metro.free(grid_ready_metro.id)
+    end
   end
   grid_ready_metro:start()
 
