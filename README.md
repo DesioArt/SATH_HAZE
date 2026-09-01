@@ -26,7 +26,7 @@ This script was developed with the assistance of Claude (Anthropic) as a collabo
 
 **via maiden:**
 ```
-;install https://github.com/DesioArt/sath-haze
+;install https://github.com/DesioArt/SATH_HAZE
 ```
 
 **manual installation:**
